@@ -1,0 +1,24 @@
+<form action="index.php?act=create" method="post" enctype="multipart/form-data">
+Отдел:
+    <select name="department" required>
+    {foreach from=$department_list key=k item=value}
+      <option value="{$k}">{$value}</option>
+    {/foreach}
+    </select><br><br>
+Приоритет: 
+    <select name="prioritet" required> 
+    {foreach from=$prioritet_list key=k item=value}
+      <option value="{$k}">{$value}</option>
+    {/foreach}
+    </select><br><br>
+Название задачи: <input type="text" name="title" required><br><br>
+Описание задачи: <textarea name="message" rows="5" cols="40" required></textarea><br><br>
+Загрузка картинки:<br>
+    <input type="file" name="images[]"><br>
+    <input type="file" name="images[]"><br>
+    <input type="file" name="images[]"><br>
+    <input type="file" name="images[]"><br>
+    <input type="file" name="images[]"><br>
+<input type="submit"><br><br>
+
+</form>

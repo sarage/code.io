@@ -1,0 +1,29 @@
+<form action="index_client.php?act=create" method="post" enctype="multipart/form-data">
+E-mail:
+  <input type="email" name="email"><br><br>
+Приоритет: 
+    <select name="prioritet" required> 
+    {foreach from=$prioritet_list key=k item=value}
+      <option value="{$k}">{$value}</option>
+    {/foreach}
+    </select><br><br>
+Название товара: <input type="text" name="title" required><br><br>
+Описание товара: <textarea name="message" rows="5" cols="40" required></textarea><br><br>
+Загрузка картинки:<br>
+    <input type="file" name="images[]"><br>
+    <input type="file" name="images[]"><br>
+    <input type="file" name="images[]"><br>
+    <input type="file" name="images[]"><br>
+    <input type="file" name="images[]"><br>
+<input type="submit"><br><br>
+</form>
+
+<button type="button" onclick="emailFunction()">Просмотр товаров</button><br>
+<script>
+function emailFunction() {
+    var email = prompt("email", "email@email.com");
+    if (email != null) {
+      location.href='index_client.php?act=list&email='+email;
+    }
+}
+</script>

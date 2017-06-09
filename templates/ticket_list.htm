@@ -1,0 +1,19 @@
+  <table cellpadding="3" cellspacing="1" border="1">
+    <tr>
+      <th>Дата</th>
+      <th>Задача</th>
+      <th>Отдел</th>
+      <th>Приоритет</th>
+    </tr>
+    {foreach from=$ticket_list item=ticket}
+    <tr>
+      <td>{$ticket.date}</td>
+      <td><a href="index.php?act=show&id={$ticket.id}">{$ticket.title}</a></td>
+      <td>{$department_list.$ticket.department}</td>
+      <td>{$prioritet_list.$ticket.prioritet}</td>
+    </tr>
+    {foreachelse}
+    <tr><td class="no-records" colspan="4">нет данных</td></tr>
+    {/foreach}
+  </table>
+    <button type="button" onclick="location.href='index.php?act=add'">Добавить новую задачу</button><br>

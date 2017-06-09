@@ -1,0 +1,15 @@
+  <table cellpadding="3" cellspacing="1" border="1">
+    <tr>
+      <th>Дата</th>
+      <th>Товар</th>
+      <th>Приоритет</th>
+    </tr>
+    {foreach from=$product_list item=ticket}
+    <tr>
+      <td>{$ticket.date}</td>
+      <td><a href="index_client.php?act=show&id={$ticket.id}">{$ticket.title}</a></td>
+      <td>{$prioritet_list.$ticket.prioritet}</td>
+    </tr>
+    {/foreach}
+  </table>
+    <button type="button" onclick="location.href='index_client.php'">Добавить новый поиск</button><br>

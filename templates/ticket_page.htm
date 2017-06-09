@@ -1,0 +1,24 @@
+    Тикет №: {$ticket.id}<br>
+    Название: {$ticket.title}<br>
+    Дата: {$ticket.date}<br>
+    Отдел: {$department.$ticket.department}<br>
+    Приоритет: {$prioritet.$ticket.prioritet}<br>
+    Описание: {$ticket.message}     
+    <button type="button" onclick="location.href='index.php?act=done&id={$ticket.id}'">Выполнен</button><br><br>
+    {if $images}
+    {foreach from=$images item=image}
+    	<p>
+    	<img src='uploads/{$image}'>
+    	</p>
+    {/foreach}
+    {/if}
+<form action="index.php?act=post" method="post">
+<input type="hidden" name = 'ticket_id' value="{$ticket.id}">
+<h1>Новое сообщение: </h1>
+<textarea name="message" rows="5" cols="40" required ></textarea><br><br>
+    <input type="submit"><br><br>
+</form>
+{foreach from = $messages item=message}
+<p>{$message.date}</p>
+<p>{$message.message}</p>
+{/foreach}
