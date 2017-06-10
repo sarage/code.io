@@ -22,7 +22,7 @@ E-mail:
 <script>
 function emailFunction() {
     var email = prompt("email", "email@email.com");
-    if (email != null) {
+    if (email.length != 0) {
       location.href='index_client.php?act=list&email='+email;
     }
 }

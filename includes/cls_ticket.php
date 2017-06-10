@@ -57,6 +57,10 @@ class cls_ticket
         $sql = 'SELECT * FROM '. $this->ticket_table. ' WHERE email= "'.$email.'"'; //.' ORDER BY id DESC';
         return $this->db->getAll($sql);
     }
+    function get_email($email){
+        $sql = 'SELECT email FROM '. $this->ticket_table. ' WHERE email= "'.$email.'"';
+        return $this->db->getOne($sql);
+    }
 	function get_prioritet(){
         return $this->prioritet;
     }

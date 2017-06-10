@@ -40,16 +40,22 @@ if($action=='create'){
 else if($action=='show'){
 	$id = $_GET['id'];
 	$item = $ticket->get_ticket($id);
-	$prioritet = $ticket->get_prioritet();
-	if(strlen($item['images'])>0){
-		$_images =explode(',', $item['images']);
-		$smarty->assign('images',$_images);
+	session_start();
+	if($_SESSION['email']==$item['email']){
+		$prioritet = $ticket->get_prioritet();
+		if(strlen($item['images'])>0){
+			$_images =explode(',', $item['images']);
+			$smarty->assign('images',$_images);
+		}
+		$messages = $ticket->get_messages($id);
+		$smarty->assign('messages',$messages);
+		$smarty->assign('prioritet', $prioritet);
+		$smarty->assign('ticket',$item);
+		$smarty->display('product_page.htm');
 	}
-	$messages = $ticket->get_messages($id);
-	$smarty->assign('messages',$messages);
-	$smarty->assign('prioritet', $prioritet);
-	$smarty->assign('ticket',$item);
-	$smarty->display('product_page.htm');
+	else{
+		echo "Ошибка";
+	}
 }
 else if($action=='post'){
 	$ticket_id = $_POST['ticket_id'];
@@ -61,19 +67,21 @@ else if($action=='post'){
 	}
 }
 else if($action=='list'){
-	$email = $_GET['email'];
-	$itemlist = $ticket->get_productlist($email);
-	if(count($itemlist)>0){
-		$prioritet_list = $ticket->get_prioritet();
-		$smarty->assign('product_list', $itemlist);
-		$smarty->assign('prioritet_list', $prioritet_list);
-		$smarty->display('product_list.htm');
-	}
-	else{
-		echo "Вы не создавали запрос на товар";
-		echo '<p><a href="index_client.php">Перейти назад</a></p';
-	}
-	
+		$email = $_GET['email'];
+		$a = $ticket->get_email($email);
+		if($email==$a){
+	 		session_start();
+	 		$_SESSION['email']=$email;
+	 		$itemlist=$ticket->get_productlist($email);
+			$prioritet_list = $ticket->get_prioritet();
+			$smarty->assign('product_list', $itemlist);
+			$smarty->assign('prioritet_list', $prioritet_list);
+			$smarty->display('product_list.htm');
+		}
+		else{
+			echo "Вы не создавали запрос на товар";
+			echo '<p><a href="index_client.php">Перейти назад</a></p';	
+		}	
 }
 else{
 	$prioritet_list = $ticket->get_prioritet();
